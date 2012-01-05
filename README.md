@@ -1,6 +1,6 @@
 A bin packing algorithm for java.
 
-There's no version. Call it 1.0 if you wish. I need to add test cases, a build and docs. 
+There's no version. Call it 1.0 if you wish. I need to add test cases docs. 
 
 If you look at the simple /src/main/test/com/acidblue/collections/binpack/Main.java class you can see how it is used.
 
