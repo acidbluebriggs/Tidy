@@ -31,14 +31,26 @@ public class Main {
     
     public static void main(String[] args) {
 
-        final RandomString[] random = {new RandomString(10), new RandomString(20),new RandomString(30)};
+        final RandomStringGenerator[] random = {new RandomStringGenerator(3), new RandomStringGenerator(20),new RandomStringGenerator(30)};
         
         final List<StringBlock> blocks = new ArrayList<StringBlock>();
         
         for (int i = 0; i < 400; i++) {
             final int ran = (int) (Math.random() * 3);
-            blocks.add(new StringBlock(random[ran].nextString()));
+            final String randomString = random[ran].nextString();
+            System.out.println(randomString);
+            blocks.add(new StringBlock(randomString));
         }
+        
+        //add one long string that can't be added.
+        
+        final String ignoreMe = "This is an annoyingly long string that will no fit in any bins, so" +
+                        " we should have an ignored block";
+
+        StringBlock block = new StringBlock("This is an annoyingly long string that will no fit in any bins, so" +
+                " we should have an ignored block");
+        
+        blocks.add(block);
 
         VetoableBlockBinPacker<StringBlock> packer = new VetoableBlockBinPacker<StringBlock>(blocks, 60, 10);
 
@@ -53,6 +65,11 @@ public class Main {
 
             public void itemIgnored(final BinEvent event) {
                 System.out.println("Item ignored");
+                if (ignoreMe.equals(event.getSource())) {
+                    System.out.println("Expected item was ignored.");
+                } else {
+                    System.out.println("Whe we have tests, this would be a failure");
+                }
             }
         });
 
@@ -64,7 +81,7 @@ public class Main {
 
 
 
-    public static class RandomString
+    public static class RandomStringGenerator
     {
 
       private static final char[] symbols = new char[36];
@@ -80,7 +97,7 @@ public class Main {
 
       private final char[] buf;
 
-      public RandomString(int length)
+      public RandomStringGenerator(int length)
       {
         if (length < 1)
           throw new IllegalArgumentException("length < 1: " + length);

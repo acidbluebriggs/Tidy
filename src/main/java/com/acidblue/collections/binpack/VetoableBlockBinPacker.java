@@ -39,7 +39,7 @@ public class VetoableBlockBinPacker<T extends Block<?>> extends FirstFitBinPacke
             if (candidateBlock(block)) {
                 add(block);
             } else {
-                fireIgnoredEvent(new BinEvent<T>(null, block));
+                fireIgnoredEvent(new BinEvent<T>(block, block));
             }
         }
 

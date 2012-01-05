@@ -10,7 +10,7 @@ public class BinEvent<T extends Block<?>> extends EventObject {
         this(source, null);
     }
 
-    public BinEvent(final Bin<T> source, final T block) {
+    public BinEvent(final Object source, final T block) {
         super(source);
         this.block = block;
     }
