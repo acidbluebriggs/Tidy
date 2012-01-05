@@ -38,7 +38,6 @@ public class Main {
         for (int i = 0; i < 400; i++) {
             final int ran = (int) (Math.random() * 3);
             final String randomString = random[ran].nextString();
-            System.out.println(randomString);
             blocks.add(new StringBlock(randomString));
         }
         
@@ -47,10 +46,8 @@ public class Main {
         final String ignoreMe = "This is an annoyingly long string that will no fit in any bins, so" +
                         " we should have an ignored block";
 
-        StringBlock block = new StringBlock("This is an annoyingly long string that will no fit in any bins, so" +
-                " we should have an ignored block");
-        
-        blocks.add(block);
+        blocks.add(new StringBlock("This is an annoyingly long string that will no fit in any bins, so" +
+                        " we should have an ignored block"));
 
         VetoableBlockBinPacker<StringBlock> packer = new VetoableBlockBinPacker<StringBlock>(blocks, 60, 10);
 
@@ -65,7 +62,7 @@ public class Main {
 
             public void itemIgnored(final BinEvent event) {
                 System.out.println("Item ignored");
-                if (ignoreMe.equals(event.getSource())) {
+                if (ignoreMe.equals(event.getBlock().getData())) {
                     System.out.println("Expected item was ignored.");
                 } else {
                     System.out.println("Whe we have tests, this would be a failure");
