@@ -1,7 +1,16 @@
 package com.acidblue.collections.binpack;
 
-public interface BadBlock {
+/**
+ *  Simply adds a new {@link #getMessage()} to a block for returning a human, or machine,
+ *  readable reason that the block could not be added.
+ */
+public interface BadBlock<E> extends Block<E> {
 
-    //todo, is a string good enough?
+
+    /**
+     * Returns a message for the reason the block could not be used.
+     *
+     * @return A string
+     */
     public abstract String getMessage();
 }

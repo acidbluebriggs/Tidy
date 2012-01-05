@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.acidblue.collections.binpack.DataBlockFactory.LengthCalc;
+
 /**
  * One crappy test class. No junit at the moment.
  *
@@ -12,44 +14,35 @@ import java.util.Random;
  */
 public class Main {
 
-    private static class StringBlock implements Block<String> {
-        
-        private String data;
-        
-        public StringBlock(final String str) {
-            this.data = str;
-        }
-        
-        public String getData() {
-            return data;
-        }
-
-        public long getSize() {
-            return data.length();
-        }
-    }
     
     public static void main(String[] args) {
 
         final RandomStringGenerator[] random = {new RandomStringGenerator(3), new RandomStringGenerator(20),new RandomStringGenerator(30)};
-        
-        final List<StringBlock> blocks = new ArrayList<StringBlock>();
+
+        //java sucks for this. Why can't we have first class functions?
+        final LengthCalc<String> calc = new LengthCalc<String>() {
+            @Override
+            public long getLength(final String item) {
+                return item.length();
+            }
+        };
+
+
+        final List<Block<String>> blocks = new ArrayList<Block<String>>();
         
         for (int i = 0; i < 400; i++) {
             final int ran = (int) (Math.random() * 3);
             final String randomString = random[ran].nextString();
-            blocks.add(new StringBlock(randomString));
+            blocks.add(DataBlockFactory.dataBlock(randomString, calc));
         }
         
         //add one long string that can't be added.
-        
         final String ignoreMe = "This is an annoyingly long string that will no fit in any bins, so" +
                         " we should have an ignored block";
 
-        blocks.add(new StringBlock("This is an annoyingly long string that will no fit in any bins, so" +
-                        " we should have an ignored block"));
+        blocks.add(DataBlockFactory.dataBlock(ignoreMe, calc));
 
-        VetoableBlockBinPacker<StringBlock> packer = new VetoableBlockBinPacker<StringBlock>(blocks, 60, 10);
+        VetoableBlockBinPacker<Block<String>> packer = new VetoableBlockBinPacker<Block<String>>(blocks, 60, 10);
 
         packer.addBinEventListener(new BinEventListener() {
             public void binCreated(final BinEvent event) {
@@ -70,7 +63,7 @@ public class Main {
             }
         });
 
-        List<Bin<StringBlock>> bins = packer.packBlocks().getBins();
+        List<Bin<Block<String>>> bins = packer.packBlocks().getBins();
 
         System.out.println(bins.size());
 

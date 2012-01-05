@@ -5,6 +5,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * A BinPacker which will simply fit a block within the first available bin. No optimization is done.
+ *
+ * @param <T> The type encapsulated within the bins of the bin packer
+ */
 public class FirstFitBinPacker<T extends Block<?>> extends AbstractBinPacker<T> {
 
     private final Comparator<T> BLOCK_COMPARATOR = new Comparator<T>() {
@@ -14,6 +19,12 @@ public class FirstFitBinPacker<T extends Block<?>> extends AbstractBinPacker<T> 
         }
     };
 
+    /**
+     * Creates a bin packer with the maximum length a bit can be. All blocks are accumulated within
+     * each bin and when that threshold is reached, a new bin will be created.
+     *
+     * @param maxBinSize The max length of a bin
+     */
     public FirstFitBinPacker(long maxBinSize) {
         super(maxBinSize);
     }
@@ -22,7 +33,10 @@ public class FirstFitBinPacker<T extends Block<?>> extends AbstractBinPacker<T> 
         Collections.sort(blocks, BLOCK_COMPARATOR);
     }
 
-    public Bin<T> add(T item) {
+    public Bin<T> add(final T item) {
+
+        //todo, rewrite this. This was code from a class I lost the source for and had to decompile it.
+        //this got really funky.
         if (item == null) {
             throw new NullPointerException("item cannot be null");
         }

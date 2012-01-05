@@ -1,14 +1,31 @@
 package com.acidblue.collections.binpack;
 
-public class BadDataBlock<E> extends DataBlock<E> implements BadBlock {
+/**
+ * A block which encapsulates data which could not be used by a {@link BinPacker} instance.
+ * Clients inspect the {@link #getMessage()} to determine the reason.
+ * @param <E>
+ */
+public class BadDataBlock<E> extends DataBlock<E> implements BadBlock<E> {
 
     private String message;
 
+    /**
+     * Creates a new block with the data to be encapsulated and a mandatory
+     * message as to why it could not be added.
+     * @param data The data, which failed packing, to encapsulate
+     * @param message The reason the block could not be packed
+     */
     public BadDataBlock(final E data, final String message) {
         super(data);
         this.setMessage(message);
     }
 
+    /**
+     * Returns a reason, either human or machine readable, why the encapsulated data could not packed by the
+     * bin packer.
+     *
+     * @return Some string message
+     */
     public String getMessage() {
         return message;
     }

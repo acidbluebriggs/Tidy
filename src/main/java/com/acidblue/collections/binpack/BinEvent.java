@@ -2,6 +2,12 @@ package com.acidblue.collections.binpack;
 
 import java.util.EventObject;
 
+/**
+ * Represents an event during the bin packing process.
+ *
+ * @param <T>
+ * @see BinEventListener
+ */
 public class BinEvent<T extends Block<?>> extends EventObject {
 
     private final T block;

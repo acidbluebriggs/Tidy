@@ -1,5 +1,10 @@
 package com.acidblue.collections.binpack;
 
+/**
+ * Simply begins the definition of a {@link Block} by encapsulating the data accociated with the block.
+ * Sublcasses need to implement the {@link #getSize()} method.
+ * @param <E>
+ */
 public abstract class DataBlock<E> implements Block<E> {
 
     private final E data;
@@ -7,8 +12,6 @@ public abstract class DataBlock<E> implements Block<E> {
     public DataBlock(final E data) {
         this.data = data;
     }
-
-    public abstract long getSize();
 
     public String toString() {
         
