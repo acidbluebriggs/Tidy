@@ -53,3 +53,6 @@ vcs.xml
 xcode.xml
 scopes/
 .idea/
+
+#maven garbage
+target/
