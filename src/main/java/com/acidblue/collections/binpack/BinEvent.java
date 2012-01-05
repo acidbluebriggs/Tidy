@@ -2,20 +2,20 @@ package com.acidblue.collections.binpack;
 
 import java.util.EventObject;
 
-public class BinEvent<T extends Block<T>> extends EventObject {
+public class BinEvent<T extends Block<?>> extends EventObject {
 
-    private final Block<T> block;
+    private final T block;
 
     public BinEvent(final Bin<T> source) {
         this(source, null);
     }
 
-    public BinEvent(final Bin<T> source, final Block<T> block) {
+    public BinEvent(final Bin<T> source, final T block) {
         super(source);
         this.block = block;
     }
 
-    public Block<T> getBlock() {
+    public T getBlock() {
         return block;
     }
 }

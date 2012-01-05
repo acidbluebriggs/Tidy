@@ -6,8 +6,9 @@ import java.util.List;
 
 import javax.swing.event.EventListenerList;
 
-public abstract class AbstractBinPacker<T extends Block<T>> implements BinPacker<T> {
+public abstract class AbstractBinPacker<T extends Block<?>> implements BinPacker<T> {
 
+    //todo make immutable
     protected long maxBinSize;
     protected final List<Bin<T>> binList;
     private int binCount;

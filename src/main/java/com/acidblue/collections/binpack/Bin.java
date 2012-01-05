@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Bin<T extends Block<T>> {
+public class Bin<T extends Block<?>> {
 
     private final long limit;
     private long size;
     private int id;
-    private final List<Block<T>> items = new ArrayList<Block<T>>();
+    private final List<T> items = new ArrayList<T>();
 
     protected Bin(long sizeLimit, int id) {
         this.id = -1;
@@ -21,7 +21,7 @@ public class Bin<T extends Block<T>> {
         }
     }
 
-    public boolean addItem(Block<T> item) {
+    public boolean addItem(T item) {
         final boolean added;
         
         if (item == null) {
@@ -55,6 +55,4 @@ public class Bin<T extends Block<T>> {
     public int getId() {
         return id;
     }
-
-
 }

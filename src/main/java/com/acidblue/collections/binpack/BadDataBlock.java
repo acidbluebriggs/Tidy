@@ -1,11 +1,10 @@
 package com.acidblue.collections.binpack;
 
-public class BadDataBlock<T> extends DataBlock<T>
-        implements BadBlock<T> {
+public class BadDataBlock<E> extends DataBlock<E> implements BadBlock {
 
     private String message;
 
-    public BadDataBlock(final T data, final String message) {
+    public BadDataBlock(final E data, final String message) {
         super(data);
         this.setMessage(message);
     }

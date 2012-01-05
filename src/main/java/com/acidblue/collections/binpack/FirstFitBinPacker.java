@@ -5,25 +5,24 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class FirstFitBinPacker<T extends Block<T>> extends AbstractBinPacker<T> {
+public class FirstFitBinPacker<T extends Block<?>> extends AbstractBinPacker<T> {
 
-    private final Comparator<Block<T>> BLOCK_COMPARATOR = new Comparator<Block<T>>() {
+    private final Comparator<T> BLOCK_COMPARATOR = new Comparator<T>() {
 
-        public int compare(Block<T> firstBlock, Block<T> secondBlock) {
+        public int compare(final T firstBlock, final T secondBlock) {
             return Long.valueOf(secondBlock.getSize()).compareTo(firstBlock.getSize());
         }
     };
-
 
     public FirstFitBinPacker(long maxBinSize) {
         super(maxBinSize);
     }
 
-    private void sort(List<Block<T>> blocks) {
+    private void sort(List<T> blocks) {
         Collections.sort(blocks, BLOCK_COMPARATOR);
     }
 
-    public Bin<T> add(Block<T> item) {
+    public Bin<T> add(T item) {
         if (item == null) {
             throw new NullPointerException("item cannot be null");
         }
@@ -53,15 +52,15 @@ public class FirstFitBinPacker<T extends Block<T>> extends AbstractBinPacker<T> 
         return targetBin;
     }
 
-    public void addAll(final List<Block<T>> items) {
+    public void addAll(final List<T> items) {
 
         //someone could have sent an immutable list, don't alter theirs anyway.
-        final List<Block<T>> copy = new ArrayList<Block<T>>();
+        final List<T> copy = new ArrayList<T>();
         copy.addAll(items);
         sort(copy);
         //do the work
-        for (final Block<T> tBlock : copy) {
-            add(tBlock);
+        for (final T block : copy) {
+            add(block);
         }
     }
 }

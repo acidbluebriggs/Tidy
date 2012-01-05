@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class VetoableBlockBinPacker<T extends Block<T>> extends FirstFitBinPacker<T> {
+public class VetoableBlockBinPacker<T extends Block<?>> extends FirstFitBinPacker<T> {
 
-    private List<Block<T>> blocks;
+    private List<T> blocks;
     private int maximumBlockSizePerBin;
     private final List<T> badBlocks = new ArrayList<T>();
 
-    public VetoableBlockBinPacker(final List<Block<T>> blocks,
+    public VetoableBlockBinPacker(final List<T> blocks,
                                   final Integer maxiumTotalSizePerBin,
                                   final Integer maximumBlocksPerBin) {
 
@@ -34,8 +34,8 @@ public class VetoableBlockBinPacker<T extends Block<T>> extends FirstFitBinPacke
         return getBins();
     }
 
-    public BinPacker packBlocks() {
-        for (final Block<T> block : blocks) {
+    public BinPacker<T> packBlocks() {
+        for (final T block : blocks) {
             if (candidateBlock(block)) {
                 add(block);
             } else {
@@ -46,7 +46,7 @@ public class VetoableBlockBinPacker<T extends Block<T>> extends FirstFitBinPacke
         return this;
     }
 
-    public Bin<T> add(final Block<T> item) {
+    public Bin<T> add(final T item) {
         if (item == null) {
             throw new NullPointerException("item was null");
         }
@@ -97,7 +97,7 @@ public class VetoableBlockBinPacker<T extends Block<T>> extends FirstFitBinPacke
         return blocks;
     }
 
-    public void setBlocks(List<Block<T>> blocks) {
+    public void setBlocks(List<T> blocks) {
         this.blocks = blocks;
     }
 

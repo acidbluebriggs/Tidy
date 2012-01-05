@@ -2,6 +2,7 @@ package com.acidblue.collections.binpack;
 
 public class BlockAnalyzer<T> {
 
+    protected static final float ONE_HUNDRED_PERCENT = 100.0F;
     //don't mutate these.
     private float fragmentationThreshold;
     private long optimalSize;
@@ -17,7 +18,7 @@ public class BlockAnalyzer<T> {
     }
 
     public static float percentage(final float a, final float b) {
-        return a == b ? 100.0F : (a - b) / a * 100.0F;
+        return a == b ? ONE_HUNDRED_PERCENT : (a - b) / a * ONE_HUNDRED_PERCENT;
     }
 
     public float getFragmentationThreshold() {

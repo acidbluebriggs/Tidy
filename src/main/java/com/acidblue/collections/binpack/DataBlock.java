@@ -1,10 +1,10 @@
 package com.acidblue.collections.binpack;
 
-public abstract class DataBlock<T> implements Block<T> {
+public abstract class DataBlock<E> implements Block<E> {
 
-    private final T data;
+    private final E data;
 
-    public DataBlock(final T data) {
+    public DataBlock(final E data) {
         this.data = data;
     }
 
@@ -28,7 +28,7 @@ public abstract class DataBlock<T> implements Block<T> {
         return builder.toString();
     }
 
-    public T getData() {
+    public E getData() {
         return data;
     }
 

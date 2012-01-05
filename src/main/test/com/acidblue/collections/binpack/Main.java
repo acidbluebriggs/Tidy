@@ -6,6 +6,7 @@ import java.util.Random;
 
 /**
  * One crappy test class. No junit at the moment.
+ *
  * @author Marc Miller
  * @since 2.0
  */
@@ -32,25 +33,25 @@ public class Main {
 
         final RandomString[] random = {new RandomString(10), new RandomString(20),new RandomString(30)};
         
-        final List<Block<String>> blocks = new ArrayList<Block<String>>();
+        final List<StringBlock> blocks = new ArrayList<StringBlock>();
         
         for (int i = 0; i < 400; i++) {
             final int ran = (int) (Math.random() * 3);
             blocks.add(new StringBlock(random[ran].nextString()));
         }
 
-        VetoableBlockBinPacker packer = new VetoableBlockBinPacker(blocks, 60, 10);
+        VetoableBlockBinPacker<StringBlock> packer = new VetoableBlockBinPacker<StringBlock>(blocks, 60, 10);
 
         packer.addBinEventListener(new BinEventListener() {
-            public void binCreated(final BinEvent binevent) {
+            public void binCreated(final BinEvent event) {
                 System.out.println("Bin Created");
             }
 
-            public void itemAdded(final BinEvent binevent) {
+            public void itemAdded(final BinEvent event) {
                 System.out.println("Item added");
             }
 
-            public void itemIgnored(final BinEvent binevent) {
+            public void itemIgnored(final BinEvent event) {
                 System.out.println("Item ignored");
             }
         });
@@ -58,7 +59,6 @@ public class Main {
         List<Bin<StringBlock>> bins = packer.packBlocks().getBins();
 
         System.out.println(bins.size());
-
 
     }
 
