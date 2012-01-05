@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * One crappy test class. No junit at the moment.
  *
- * @author Marc Miller
+ * @author Briggs
  * @since 2.0
  */
 public class Main {
