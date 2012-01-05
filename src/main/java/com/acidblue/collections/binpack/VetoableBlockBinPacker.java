@@ -51,7 +51,7 @@ public class VetoableBlockBinPacker<T extends Block<?>> extends FirstFitBinPacke
             throw new NullPointerException("item was null");
         }
 
-        //todo fix this, decompiler problem
+        //todo fix this, fix this ugly code
 
         Bin<T> targetBin = null;
         boolean added = false;
