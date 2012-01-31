@@ -17,7 +17,11 @@ public class Main {
     
     public static void main(String[] args) {
 
-        final RandomStringGenerator[] random = {new RandomStringGenerator(3), new RandomStringGenerator(20),new RandomStringGenerator(30)};
+        final RandomStringGenerator[] random = {
+            new RandomStringGenerator(3), 
+            new RandomStringGenerator(20),
+            new RandomStringGenerator(30)
+        };
 
         //java sucks for this. Why can't we have first class functions?
         final LengthCalc<String> calc = new LengthCalc<String>() {
@@ -42,9 +46,10 @@ public class Main {
 
         blocks.add(DataBlockFactory.dataBlock(ignoreMe, calc));
 
-        VetoableBlockBinPacker<Block<String>> packer = new VetoableBlockBinPacker<Block<String>>(blocks, 60, 10);
+        final VetoableBlockBinPacker<Block<String>> packer = new VetoableBlockBinPacker<Block<String>>(blocks, 60, 10);
 
         packer.addBinEventListener(new BinEventListener() {
+            
             public void binCreated(final BinEvent event) {
                 System.out.println("Bin Created");
             }
@@ -63,7 +68,7 @@ public class Main {
             }
         });
 
-        List<Bin<Block<String>>> bins = packer.packBlocks().getBins();
+        final List<Bin<Block<String>>> bins = packer.packBlocks().getBins();
 
         System.out.println(bins.size());
 
@@ -87,15 +92,13 @@ public class Main {
 
       private final char[] buf;
 
-      public RandomStringGenerator(int length)
-      {
+      public RandomStringGenerator(int length) {
         if (length < 1)
           throw new IllegalArgumentException("length < 1: " + length);
         buf = new char[length];
       }
 
-      public String nextString()
-      {
+      public String nextString() {
         for (int idx = 0; idx < buf.length; ++idx)
           buf[idx] = symbols[random.nextInt(symbols.length)];
         return new String(buf);
