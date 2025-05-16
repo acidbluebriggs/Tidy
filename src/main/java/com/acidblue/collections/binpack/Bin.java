@@ -36,7 +36,7 @@ public class Bin<T extends Block<?>> {
         return added;
     }
 
-    public List getItems() {
+    public List<T> getItems() {
         return Collections.unmodifiableList(items);
     }
 
@@ -44,7 +44,7 @@ public class Bin<T extends Block<?>> {
         return size;
     }
 
-    protected boolean isRoom(Block item) {
+    protected boolean isRoom(Block<?> item) {
         return size + item.getSize() <= limit;
     }
 

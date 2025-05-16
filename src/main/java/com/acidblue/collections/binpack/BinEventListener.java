@@ -14,14 +14,14 @@ public interface BinEventListener extends EventListener {
      *
      * @param event The event
      */
-    public abstract void binCreated(BinEvent event);
+    public abstract void binCreated(BinEvent<?> event);
 
     /**
      * An item added to a bin.
      *
      * @param event The event
      */
-    public abstract void itemAdded(BinEvent event);
+    public abstract void itemAdded(BinEvent<?> event);
 
     /**
      * An item was ignored during the process. Clients can inspect the event's
@@ -29,5 +29,5 @@ public interface BinEventListener extends EventListener {
      *
      * @param event The event
      */
-    public abstract void itemIgnored(BinEvent event);
+    public abstract void itemIgnored(BinEvent<?> event);
 }

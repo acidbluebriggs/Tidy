@@ -9,8 +9,9 @@ import java.util.EventObject;
  * @see BinEventListener
  */
 public class BinEvent<T extends Block<?>> extends EventObject {
+    private static final long serialVersionUID = 1L;
 
-    private final T block;
+    private transient final T block;
 
     public BinEvent(final Bin<T> source) {
         this(source, null);

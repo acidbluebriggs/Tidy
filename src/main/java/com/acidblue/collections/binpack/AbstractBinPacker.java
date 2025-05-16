@@ -73,7 +73,7 @@ public abstract class AbstractBinPacker<T extends Block<?>> implements BinPacker
     //call on the listener.  First class functions would be nice. But, now to do this, I have to
     //either create a stupid framework/utility whatever for it.
 
-    protected void fireCreatedEvent(final BinEvent evt) {
+    protected void fireCreatedEvent(final BinEvent<T> evt) {
         final Object listeners[] = listenerList.getListenerList();
 
         for (int i = 0; i < listeners.length; i += 2) {
@@ -83,7 +83,7 @@ public abstract class AbstractBinPacker<T extends Block<?>> implements BinPacker
         }
     }
 
-    protected void fireAddedEvent(final BinEvent evt) {
+    protected void fireAddedEvent(final BinEvent<T> evt) {
         final Object listeners[] = listenerList.getListenerList();
 
         for (int i = 0; i < listeners.length; i += 2) {
@@ -93,7 +93,7 @@ public abstract class AbstractBinPacker<T extends Block<?>> implements BinPacker
         }
     }
 
-    protected void fireIgnoredEvent(final BinEvent evt) {
+    protected void fireIgnoredEvent(final BinEvent<Block<T>> evt) {
         final Object listeners[] = listenerList.getListenerList();
 
         for (int i = 0; i < listeners.length; i += 2) {
